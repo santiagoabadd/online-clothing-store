@@ -1,0 +1,128 @@
+.orders-container-flex {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    
+}
+
+.orders-container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 30px;
+    
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse; 
+}
+
+.order-table-head th {
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #121212;
+    padding: 10px;
+    border-bottom: solid 2px #121212; 
+}
+
+.order-table-body td {
+    
+    border-bottom: solid 1px #1212128C; 
+}
+
+.order-items-container{
+    display: flex;
+    justify-content: center;
+    
+}
+
+
+
+
+
+.order-price {
+ 
+    font-size: 14px;
+    font-weight: 600;
+    color: #e10000;
+    font-style: normal;
+    letter-spacing: 1px;
+    margin-left:13PX ;
+    
+    
+  }
+
+  .nav-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #121212BF;
+    font-size: 14px;
+    margin: 13px;
+    font-weight: 700;
+  }
+
+
+  .nav-button-display{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #121212BF;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 13px 0PX;
+  }
+
+  .nav-button-display > svg{
+    margin-left: 2px;
+    color: #0f0f0f;
+    
+  }
+
+  .category-display{
+    margin-left: 14px;
+    margin: 7px;
+    display: flex;
+    color: #121212BF;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .category-display:hover,.nav-button-display:hover,.nav-button:hover{
+    
+    color: rgb(18, 18, 18);
+    
+   
+  }
+
+  .nav-button-display:hover,.nav-button:hover{
+    
+    color: rgb(18, 18, 18);
+    border-bottom: 1px solid rgb(18, 18, 18);
+   
+  }
+
+  .order-sku , .order-quantity, .order-size{
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #121212;
+  }
+
+  .order-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 5px;
+    margin-left: 18px;
+  }
+  
+  .order-item img {
+    width: 100px;
+    margin-right: 10px;
+  }
+  
+  .order-number-td,.order-date-td{
+    text-align: center;
+  }

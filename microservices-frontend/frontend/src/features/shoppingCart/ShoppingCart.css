@@ -1,0 +1,157 @@
+.shopping-cart {
+    position: fixed;
+    top: 0;
+    right: -400px; 
+    width: 400px;
+    height: 100%;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+
+  .shopping-cart-content{
+    padding: 0px 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-header{
+    padding: 15px 0px;
+    display: flex;
+    justify-content: space-between;
+    
+  }
+
+  .cart-header-title{
+    font-size: 10px;
+    color: #1212128C;
+    letter-spacing: 1px;
+  }
+
+  .cart-header-products{
+    padding-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 1px #1212128C;
+  }
+
+  .item-title{
+    font-size: 14px;
+    color:#121212;
+  }
+
+  .item-size{
+    margin-top: 5px;
+    font-size: 14px;
+    color:#121212;
+    margin-bottom: 25px;
+  }
+
+  .item-price{
+    margin-top: 5px;
+    color:#1212128C;
+    font-size: 14px;
+    letter-spacing: 1px;
+
+  }
+
+  .cart-footer{
+    margin-top: auto;
+    padding-bottom: 15px;
+  }
+
+  .cart-total{
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    border-top: solid 1px #1212128C;
+  }
+
+  .cart-total-price{
+    font-size: 18px;
+    letter-spacing: 1px;
+    color:#1212128C;
+  }
+
+  .total-advice{
+    color:#1212128C;
+    font-size: 16px;
+    margin: 10px 0px;
+  }
+
+  .cart-total-title{
+    color: #121212;
+    font-size: 16px;
+  }
+
+  .check-out-button{
+    margin-top: 5px;
+    height: 45px;
+    width: 100%;    
+    background-color: #222222;
+    transition: transform 0.3s;
+    color: white;
+  }
+  
+  .check-out-button:hover{
+    background-color: #222222;
+    border: none;
+    box-shadow: none;
+    transform: scale(1.01)
+  }
+  
+  .shopping-cart.open {
+    right: 0; 
+  }
+  
+  .shopping-cart.closed {
+    right: -400px; 
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    padding-top: 25px;
+  }
+  
+  .cart-item img {
+    width: 100px;
+    margin-right: 10px;
+  }
+
+  .item-quantity-selector{
+    display: flex;
+
+  }
+
+  .item-total-price{
+    display: flex;
+    align-self: start;
+    font-weight: 600;
+    justify-content: end;
+    color:#121212;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .item-quantity-selector > button{
+    margin-left: 20px;
+  }
+  
+  .cart-item div {
+    flex: 1;
+  }
+  
+ 
+  
+  .close-button {
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
