@@ -1,0 +1,8 @@
+A full-stack online store with a microservices architecture. The backend, built with Spring Boot, utilized Docker for containerization, Spring Cloud Gateway and Eureka for routing and service discovery, and Kafka for asynchronous messaging. Resilience4j was implemented to handle service resilience, including the circuit breaker pattern to manage failures and enhance system stability. Authentication and authorization were managed with Spring Security and Keycloak, with MySQL and PostgreSQL used as databases.
+
+On the frontend, React with TypeScript was used to create a dynamic user interface and Redux for global state management. Keycloak was integrated for authentication via oidc-client, ensuring a secure and efficient user experience
+
+
+Tienda online FullStack utilizando una arquitectura de microservicios. El backend fue construido con Spring Boot, implementando tecnologías como Docker para contenerización, Spring Cloud Gateway y Eureka para enrutamiento y descbrimiento de servicios, y Kafka para mensajería asíncrona. Implementé Resilience4j para manejar la resiliencia de los servicios, incluyendo el patrón de circuit breaker para gestionar fallos y mejorar la estabilidad del sistema. La autenticación y autorización fueron gestionadas con Spring Security y Keycloak, mientras que MySQL y PostgreSQL se utilizaron como bases de datos.
+
+En el frontend, utilicé React con TypeScript para crear una interfaz de usuario interactiva y Redux para el manejo del estado global. Integré Keycloak para la autenticación a través de oidc-client, asegurando una experiencia de usuario fluida y segura.
