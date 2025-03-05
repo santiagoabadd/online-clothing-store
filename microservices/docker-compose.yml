@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: ms_inventory
-      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+      POSTGRES_PASSWORD: root
     ports:
       - 5431:5431
     expose:
@@ -20,8 +20,8 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ms_orders
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - 3307:3306
     expose:
@@ -34,8 +34,8 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ms_clients
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - 3308:3306
     expose:
@@ -47,7 +47,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: ms_products
-      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+      POSTGRES_PASSWORD: root
     ports:
       - 5432:5432
     expose:
@@ -61,7 +61,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: db_keycloak
-      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+      POSTGRES_PASSWORD: root
     ports:
       - 5433:5433
     expose:
@@ -85,7 +85,7 @@ services:
       DB_ADDR: db-keycloak
       DB_DATABASE: db_keycloak
       DB_PORT: 5433
-      DB_PASSWORD: ${POSTGRESQL_PASSWORD}
+      DB_PASSWORD: root
       KEYCLOAK_ADMIN: ${KEYCLOAK_USER}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_PASSWORD}
       KC_HTTP_PORT: 8181

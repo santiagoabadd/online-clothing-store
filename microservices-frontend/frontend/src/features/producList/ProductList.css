@@ -2,7 +2,7 @@
     display: grid;
     column-gap: 30px;
     row-gap: 80px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     max-width: 1140px;
     
     
@@ -21,6 +21,19 @@
     }
 
 }
+
+.product-collection {
+    display: flex;
+    gap: 2rem;
+    max-width: 1140px;
+}
+
+
+
+.product-grid-container {
+   
+}
+
 
 .product-labels{
     margin-left: 15px;
@@ -299,3 +312,116 @@ margin-top: 5px;
     padding: 0px 160px;
 }
 
+.product-collection {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    
+}
+
+#sort-select{
+  
+  background: transparent; 
+  border: none; 
+  padding: 0; 
+  margin: 0; 
+  font-family: inherit; 
+  font-size: inherit; 
+  color: inherit; 
+  cursor: pointer; 
+  outline: none;
+  letter-spacing: 1px;
+  color:#121212;
+  font-size: 16PX;
+}
+
+
+#sort-select > option {
+    background: none;
+    color: #1212128C;
+    border: #1212128C 0px;
+    padding: 8px;
+  }
+  
+ 
+  option:hover {
+    background-color: none;
+    color: white;
+  }
+
+#sort-select:focus{
+    border: none;
+    background: none;
+}
+
+#sort-select:focus-visible{
+    border: none;
+    background: none;
+}
+
+
+.filter-menu {
+    max-width: 300px;
+  
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+.filter-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: #1212128C 1px solid;
+    color:#1212128C;
+    font-size: 16PX;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+.filter-section label {
+    display: block;
+    color: #121212;
+    margin-bottom: 10px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+}
+
+.checkbox-group label {
+    display: flex;
+   
+    gap: 5px;
+    color:#1212128C;
+    font-size: 16PX;
+    letter-spacing: 1px;
+    font-weight: 300;
+    
+}
+
+.size-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.size-buttons button {
+    font-size: 14px;
+    padding: 3px 7px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.size-buttons button:hover {
+    background: #f0f0f0;
+}
+
+input[type="range"] {
+    width: 100%;
+}

@@ -61,7 +61,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ isOpen, onClose }) => {
         size: item.size,
       }));
       console.log(orderData);
-     await callApi('/api/order', 'POST',undefined,{ orderItems: orderData });
+     await callApi('/api/order', 'POST',{ orderItems: orderData });
      
       dispatch({ type: 'cart/clear' }); 
       onClose(); 

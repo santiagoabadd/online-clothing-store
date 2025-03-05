@@ -1,14 +1,41 @@
 import React from "react";
 import "./Home.css";
-
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
 export const Home: React.FC = () => {
 
   return (
     <div className="home-container-flex">
       <div className="home-container">
+        <button className="carousel2-navv prev">
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+        <Swiper
+          className="slider-card"
+          spaceBetween={0}
+          slidesPerView={1}
+
+          navigation={{
+            prevEl: ".carousel2-navv.prev",
+            nextEl: ".carousel2-navv.next",
+          }}
+          loop={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          modules={[Navigation]}
+
+        >
+
+
+        
+        <SwiperSlide >
         <div className="collection-container">
           <img
-            src="/img/img_04_f8346079-19c4-4fe8-bf22-666df5423795.webp"
+            src="/img/img_04_f8346079-19c4-4fe8-bf22-666df5423795.jpg"
             alt="Descripción"
             className="img-collection"
           />
@@ -20,10 +47,11 @@ export const Home: React.FC = () => {
 
           </div>
         </div>
-
+        </SwiperSlide>
+        <SwiperSlide >
         <div className="collection-container">
           <img
-            src="/img/img_02_e270cf9a-5983-4ff9-9bdc-772b5ad5410e.webp"
+            src="/img/img_02_e270cf9a-5983-4ff9-9bdc-772b5ad5410e.jpg"
             alt="Descripción"
             className="img-collection"
           />
@@ -38,10 +66,11 @@ export const Home: React.FC = () => {
 
           </div>
         </div>
-
+        </SwiperSlide>
+        <SwiperSlide >
         <div className="collection-container">
           <img
-            src="/img/img_03_599488cf-afa8-4f97-a1c3-2a03eb09a107.webp"
+            src="/img/img_03_599488cf-afa8-4f97-a1c3-2a03eb09a107.jpg"
             alt="Descripción"
             className="img-collection"
           />
@@ -53,7 +82,13 @@ export const Home: React.FC = () => {
 
           </div>
         </div>
+        </SwiperSlide>
+        </Swiper>
+        <button className="carousel2-navv next">
+          <ChevronRight className="h-6 w-6" />
+        </button>
       </div>
+      
     </div>
 
   );

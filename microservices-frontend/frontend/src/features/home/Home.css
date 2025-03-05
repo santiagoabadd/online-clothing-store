@@ -1,5 +1,8 @@
 .home-container {
     width: 100%;
+    display: flex;
+    align-items: center;
+   
 }
 
 .home-container-flex {
@@ -9,16 +12,16 @@
 
 .collection-container {
     position: relative;
-    width: 100%; 
-  
+    width: 100%;
+
 }
 
-.collection-footer{
+.collection-footer {
     line-height: 2.08rem;
     font-size: 1rem;
 }
 
-.collection-button-v2{
+.collection-button-v2 {
     margin-top: 10px;
     height: 36px;
     width: 240px;
@@ -26,7 +29,7 @@
     transition: transform 0.3s;
 }
 
-.collection-button-v2:hover{
+.collection-button-v2:hover {
     background-color: #222222;
     color: white;
     margin-top: 10px;
@@ -37,7 +40,19 @@
     transform: scale(1.01)
 }
 
-.collection-button{
+.carousel2-navv {
+    position: absolute;
+    z-index: 10;
+    padding: 20px;
+
+}
+
+.next {
+    right: 0;
+}
+
+
+.collection-button {
     margin-top: 10px;
     height: 36px;
     width: 240px;
@@ -45,7 +60,7 @@
     transition: transform 0.3s;
 }
 
-.collection-button:hover{
+.collection-button:hover {
     background-color: #222222;
     margin-top: 10px;
     height: 36px;
@@ -55,27 +70,28 @@
     transform: scale(1.01)
 }
 
-.collection-title{
+.collection-title {
     font-weight: 600;
     font-size: 50px;
     margin-top: 5px;
 }
 
-.collection-header{
+.collection-header {
     font-weight: 750;
     letter-spacing: .05rem;
     font-family: "Nunito Sans", sans-serif;
     font-size: 12px;
-     
+
 }
 
 .img-collection {
+   
     width: 100%;
-    height: auto;
     display: block;
 }
 
-.collection-info-container-side{
+
+.collection-info-container-side {
     width: 400px;
     color: #222222;
 }
@@ -88,11 +104,11 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-   justify-content: center;
-   
+    justify-content: center;
+
     color: white;
     z-index: 1;
     padding: 20px;
     text-align: center;
-   
+
 }

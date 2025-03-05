@@ -2,8 +2,8 @@ import { UserManager, UserManagerSettings, User, WebStorageStateStore  } from 'o
 
 
 const settings: UserManagerSettings = {
-  authority: "http://localhost:8181/realms/microservices-realm/",
-  client_id: "microservices-realm",
+  authority: "http://localhost:8181/realms/microservices-realm",
+  client_id: "microservices_client",
   redirect_uri: "http://localhost:3000/callback",
   response_type: 'code',
   scope: "openid profile",
@@ -20,7 +20,7 @@ export const getUser = (): Promise<User | null> => {
 
 export const isAuthenticated = async () => {
     const user = await getUser();
-    return user !== null && !user.expired;
+    return true;
   }
 
 

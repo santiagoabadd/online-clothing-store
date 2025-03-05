@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { NavBar } from "../features/navbar/NavBar";
-import { Footer } from "../features/footer/Footer";
+import { Footer } from "../features/footers/Footer";
 import ShoppingCart from "../features/shoppingCart/ShoppingCart";
-import { ProducList } from '../features/producList/ProductList';
+import { ProductList } from '../features/producList/ProductList';
+
 
 
 export const ProductListPage: React.FC = () => {
@@ -30,7 +31,7 @@ export const ProductListPage: React.FC = () => {
       <div className="home-page-container">
        
         <NavBar onOpenCart={handleOpenCart}/>
-        <ProducList category={categoryName}/>
+        <ProductList category={categoryName}/>
         <ShoppingCart isOpen={cartOpen} onClose={handleCloseCart} />
         <Footer/>
       </div>

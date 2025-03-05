@@ -25,15 +25,10 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
 
-    //instancia de kafka
     private final KafkaTemplate<String,String> kafkaTemplate;
-
-
 
     public OrderResponse placeOrder(OrderRequest orderRequest) {
 
-
-        //Check for inventory
         BaseResponse result = this.webClientBuilder.build()
                 .post()
                 .uri("lb://inventory-service/api/inventory/in-stock")
@@ -42,16 +37,16 @@ public class OrderService {
 
                 .bodyToMono(BaseResponse.class)
                 .block();
-        if (result != null && !result.hasErrors()) {
-            ClientResponse clientResponse = this.webClientBuilder.build()
-                    .get()
-                    .uri("lb://clients-service/api/client/user")
-                    .retrieve()
-                    .bodyToMono(ClientResponse.class)
-                    .block();
+        //if (result != null && !result.hasErrors()) {
+            //ClientResponse clientResponse = this.webClientBuilder.build()
+                   // .get()
+                    //.uri("lb://clients-service/api/client/user")
+                    //.retrieve()
+                    //.bodyToMono(ClientResponse.class)
+                    //.block();
 
             Order order = new Order();
-            order.setClientId(clientResponse.id().toString());
+            order.setClientId("1");
             order.setOrderNumber(UUID.randomUUID().toString());
             order.setDate(LocalDate.now());
             order.setOrderItems(orderRequest.getOrderItems().stream()
@@ -59,7 +54,6 @@ public class OrderService {
                     .toList());
             var savedOrder =this.orderRepository.save(order);
 
-            // Manda el mensaje a order topic
             this.kafkaTemplate.send("orders-topic", JsonUtil.toJson(
                     new OrderEvent(savedOrder.getOrderNumber(),savedOrder.getOrderItems().size(), OrderStatus.PLACED)
             ));
@@ -67,21 +61,21 @@ public class OrderService {
             return mapToOrderResponse(savedOrder);
 
 
-        } else {
-            throw new IllegalArgumentException("Some of the products are not in stock");
-        }
+        //} else {
+            //throw new IllegalArgumentException("Some of the products are not in stock");
+        //}
     }
 
     public List<OrderResponse> getAllOrdersByClient(){
 
-        ClientResponse clientResponse = this.webClientBuilder.build()
-                .get()
-                .uri("lb://clients-service/api/client/user")
-                .retrieve()
-                .bodyToMono(ClientResponse.class)
-                .block();
+        //ClientResponse clientResponse = this.webClientBuilder.build()
+               // .get()
+                //.uri("lb://clients-service/api/client/user")
+                //.retrieve()
+                //.bodyToMono(ClientResponse.class)
+                //.block();
 
-        List<Order> orders= this.orderRepository.findByClientId(clientResponse.id().toString());
+        List<Order> orders= this.orderRepository.findByClientId("1");
 
         return orders.stream().map(this::mapToOrderResponse).toList();
     }
@@ -93,10 +87,10 @@ public class OrderService {
     }
 
     private OrderResponse mapToOrderResponse(Order order) {
-
+        long id=1;
         return new OrderResponse(order.getId(),
                 order.getOrderNumber(),
-                clientFeignClient.getClienteById(Long.parseLong(order.getClientId())),
+
                 order.getDate(),
                 order.getOrderItems().stream().map(this::mapToOrderItemRequest).toList());
 

@@ -13,16 +13,8 @@ public class FeignClientConfig {
 
     @Bean
     public RequestInterceptor requestInterceptor() {
-        return new RequestInterceptor() {
-            @Override
-            public void apply(RequestTemplate requestTemplate) {
-                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                if (authentication instanceof JwtAuthenticationToken) {
-                    JwtAuthenticationToken jwtAuthToken = (JwtAuthenticationToken) authentication;
-                    String token = jwtAuthToken.getToken().getTokenValue();
-                    requestTemplate.header("Authorization", "Bearer " + token);
-                }
-            }
+        return requestTemplate -> {
+
         };
     }
 }

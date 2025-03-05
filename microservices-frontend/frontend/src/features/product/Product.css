@@ -78,12 +78,16 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    overflow: hidden;
   }
 
   
   
   .selected-image img {
     max-height: 612px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     
   }
 

@@ -9,6 +9,7 @@ import { ProductPage } from "./pages/ProductPage";
 import Login from "./features/login/Login";
 import Callback from "./helpers/CallBack";
 import { OrdersPage } from "./pages/OrdersPage";
+import './sass/index.scss';
 
 
 const theme: Theme = {

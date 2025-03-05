@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth
                                 
-                                .anyRequest().authenticated())
+                                .anyRequest().permitAll())
                 .oauth2ResourceServer(configure -> configure.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter())));
 
         return http.build();

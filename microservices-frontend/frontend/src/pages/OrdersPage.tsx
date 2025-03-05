@@ -3,7 +3,7 @@ import "./HomePage.css";
 
 import { Home } from "../features/home/Home";
 import { NavBar } from "../features/navbar/NavBar";
-import { Footer } from "../features/footer/Footer";
+import { Footer } from "../features/footers/Footer";
 import ShoppingCart from "../features/shoppingCart/ShoppingCart";
 import { Orders } from "../features/orders/Orders";
 export const OrdersPage: React.FC = () => {
