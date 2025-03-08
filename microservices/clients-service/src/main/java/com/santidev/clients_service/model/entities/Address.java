@@ -1,6 +1,7 @@
 package com.santidev.clients_service.model.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,7 @@ public class Address {
     private String zipCod;
 
     @OneToOne(mappedBy = "address")
+    @JsonIgnore
     private Client client;
 
 

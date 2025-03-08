@@ -8,6 +8,7 @@ import com.santidev.clients_service.model.entities.Client;
 import com.santidev.clients_service.repositories.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,10 +22,15 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
+    private final JWTService jwtService;
+
 
     public void addClient(ClientRequest clientRequest) {
         var client = Client.builder()
                 .userName((clientRequest.getUserName()))
+                .password(passwordEncoder.encode(clientRequest.getPassword()))
                 .firstName(clientRequest.getFirstName())
                 .lastName(clientRequest.getLastName())
                 .email(clientRequest.getEmail())
@@ -34,6 +40,14 @@ public class ClientService {
         clientRepository.save(client);
 
         log.info("Client added: {}", client);
+    }
+
+    public String generateToken(String username) {
+        return jwtService.generateToken(username);
+    }
+
+    public void validateToken(String token) {
+        jwtService.validateToken(token);
     }
 
     public List<ClientResponse> getAllClients() {

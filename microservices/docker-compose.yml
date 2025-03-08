@@ -70,30 +70,6 @@ services:
 
 
 
-  keycloak:
-    container_name: keycloak
-    image: quay.io/keycloak/keycloak:25.0.1
-    command: [ "start-dev" ]
-    ports:
-      - 8181:8181
-    expose:
-      - 8181
-    depends_on:
-      - db-keycloak
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: db-keycloak
-      DB_DATABASE: db_keycloak
-      DB_PORT: 5433
-      DB_PASSWORD: root
-      KEYCLOAK_ADMIN: ${KEYCLOAK_USER}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_PASSWORD}
-      KC_HTTP_PORT: 8181
-      KEYCLOAK_CORS_ALLOWED_ORIGINS: "http://localhost:3000"
-      KEYCLOAK_CORS_ALLOWED_HEADERS: "*"
-      KEYCLOAK_CORS_ALLOWED_METHODS: "GET, POST, PUT, DELETE, OPTIONS"
-
-
   ### Zookeeper
   zookeeper:
     container_name: zookeeper
