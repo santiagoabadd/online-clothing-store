@@ -7,6 +7,12 @@ section#slider2
         width: 1100px
         margin: 0 auto
 
+        @include md
+            width: 810px
+
+        @include sm
+            width: 600px
+
         .slider2-header
             display: flex
             justify-content: center
@@ -17,11 +23,18 @@ section#slider2
                 margin-top: 90px
                 line-height: 1.2
                 margin-bottom: 50px
+                @include md
+                    margin-top: 50px
+                @include sm
+                    margin-top: 30px
+                
 
         .slider2-wrapper
             display: flex
             justify-content: center
             align-items: center
+
+            
 
             .swiper-wrapper
                 display: flex
@@ -38,6 +51,11 @@ section#slider2
                         margin-right: 15px
                         width: 50%
 
+                        @include md
+                            padding: 0px 10px 0px 40px
+                        @include sm
+                            padding: 0px 10px 0px 20px
+
                         .slider2-title
                             color: #222222
                             font-weight: 400
@@ -45,12 +63,21 @@ section#slider2
                             font-family: "Nunito Sans", sans-serif
                             font-size: 24px
 
+                            @include sm
+                                font-size: 20px
+                                
+
                         .slider2-footer
                             color: #1212128C
                             margin: 0px 0px 15px 0px
                             font-size: 17px
                             letter-spacing: 0.05rem
-
+                            @include md
+                                max-height: 100px
+                                overflow: hidden 
+                            @include sm
+                                max-height: 70px
+                                overflow: hidden 
                         .slider2-span
                             display: inline
                             margin: 10px 0px 25px 0px
@@ -83,6 +110,10 @@ section#slider2
                             background-color: #222222
                             border: 0.5px #222222 solid
                             transition: transform 0.3s
+                            @include md
+                                margin-top: 7px
+                            @include sm
+                                margin-top: 7px
 
                         .slider-button-v2:hover
 
@@ -93,6 +124,10 @@ section#slider2
                             border: none
                             box-shadow: none
                             transform: scale(1.03)
+                            @include md
+                                margin-top: 7px
+                            @include sm
+                                margin-top: 7px
 
                     .slide2-img-container
                         overflow: hidden
@@ -102,15 +137,13 @@ section#slider2
                         .slide2-img
                             height: 370px
                             width: 570px
-                            
+
                             width: 100%
                             object-fit: cover
                             transition: transform 1s ease
 
                         .slide2-img:hover
                             transform: scale(1.05)
-
-                    
 
     .slider2-nav
         color: #313131bf

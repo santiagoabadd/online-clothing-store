@@ -3,6 +3,13 @@ section#best-sellers
     .section-container
         padding: 30px 30px 10px
         margin: 0px 170px
+        @include md
+            margin: 0px 90px
+
+        @include sm
+            margin: 0px 0px
+
+
         .heading-content
             display: flex
             justify-content: center
@@ -11,16 +18,10 @@ section#best-sellers
             .collection-title
                 font-size: $fontSizeB
                 font-weight: $fontWeightB
-                letter-spacing: .05rem 
+                letter-spacing: .05rem
             .collection-description
                 font-size: $fontSizeC
-                color: $colorSecondary   
+                color: $colorSecondary
                 line-height: $lineHeightA
                 letter-spacing: 0.06rem
                 font-weight: $fontWeightB
-            
-                
-            
-
-    
-        

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, PanelRightClose } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { UserIcon, ChatBubbleBottomCenterIcon } from '@heroicons/react/24/outline';
+import { all } from "axios";
 
 
 
@@ -58,7 +59,7 @@ const Slider2: React.FC = () => {
 
                                 <div className="slide2-info">
                                     <div className="slider2-title"><span>The most famous collections of Christian Dior</span></div>
-                                    <div className="slider2-span"><UserIcon className="slider-span1 h-4 w-4" /><span className="slider-span2">By</span><span className="slider-span3">Tony Stark</span><span className="slider-span4">Feb 16, 23</span><ChatBubbleBottomCenterIcon className="slider-span6 h-4 w-4" /><span className="slider-span5">1</span></div>
+                                    <div className="slider2-span"><UserIcon className="slider-span1 h-4 w-4" /><span className="slider-span2">By</span><span className="slider-span3">Tony Stark</span><span className="slider-span4">Feb 16, 23</span><ChatBubbleBottomCenterIcon className="slider-span6 h-4 w-4" /><span className="slider-span5">1</span></div>                                                                                                            .
                                     <div className="slider2-footer"><span>The history of the fashion house Christian Dior began in 1946 in a small mansion on the Parisian street Montaigne.The founder of...</span></div>
                                     <div className="slider2-button-container"><button className="slider-button-v2">READ MORE</button></div>
                                 </div>

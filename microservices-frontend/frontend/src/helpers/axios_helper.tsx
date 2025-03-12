@@ -8,10 +8,15 @@ const _callApi = (
     const url = `http://localhost:8080${servicePath}`;
     console.log("Request URL:", url);
 
+    const token = localStorage.getItem('token');
+
     const config: AxiosRequestConfig = {
         method,
         url,
         data: body,
+        headers: {
+            ...(token && { Authorization: `Bearer ${token}` }),
+        },
     };
 
     return axios(config);
