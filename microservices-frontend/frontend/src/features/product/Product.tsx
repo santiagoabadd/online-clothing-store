@@ -14,11 +14,12 @@ import { callApi } from "../../helpers/axios_helper"
 
 interface ProductProps {
     idProduct: string;
+    onOpenCart: () => void;
 }
 
 
 
-export const Product: React.FC<ProductProps> = ({ idProduct }) => {
+export const Product: React.FC<ProductProps> = ({ idProduct, onOpenCart  }) => {
     interface ProductObject {
         id: number;
         sku: string;
@@ -88,6 +89,7 @@ export const Product: React.FC<ProductProps> = ({ idProduct }) => {
             try {
                 dispatch(addItem({ sku: product.sku, price: product.price, quantity: quantity, size: selectedSize }));
                 dispatch(clearError());
+                onOpenCart()
             } catch (err) {
                 dispatch(setError("Error adding item to cart"));
             }

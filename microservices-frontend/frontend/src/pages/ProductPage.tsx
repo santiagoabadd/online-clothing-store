@@ -22,7 +22,7 @@ export const ProductPage: React.FC = () => {
     <div className="page-container">
       <div className="products-page-container">
         <NavBar onOpenCart={handleOpenCart}/>
-        <Product idProduct={productId} />
+        <Product idProduct={productId} onOpenCart={handleOpenCart} />
         <SectionsBestSellers/>
         <Footer />
         <ShoppingCart isOpen={cartOpen} onClose={handleCloseCart} />

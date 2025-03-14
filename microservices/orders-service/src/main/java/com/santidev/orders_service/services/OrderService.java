@@ -58,9 +58,9 @@ public class OrderService {
                     .toList());
             var savedOrder =this.orderRepository.save(order);
 
-            this.kafkaTemplate.send("orders-topic", JsonUtil.toJson(
-                    new OrderEvent(savedOrder.getOrderNumber(),savedOrder.getOrderItems().size(), OrderStatus.PLACED)
-            ));
+            //this.kafkaTemplate.send("orders-topic", JsonUtil.toJson(
+                   // new OrderEvent(savedOrder.getOrderNumber(),savedOrder.getOrderItems().size(), OrderStatus.PLACED)
+            //));
 
             return mapToOrderResponse(savedOrder);
 

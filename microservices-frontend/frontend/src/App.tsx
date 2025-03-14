@@ -10,8 +10,7 @@ import { ProductPage } from "./pages/ProductPage";
 import { OrdersPage } from "./pages/OrdersPage";
 import './sass/index.scss';
 import ProtectedRoute from './ProtectedRoute';
-import Login from "./auth/Login";
-import Register from "./auth/Register";
+import AuthPage from "./pages/AuthPage";
 
 const theme: Theme = {
   colors: {
@@ -36,8 +35,7 @@ export const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
+        <Route path="/login" element={<AuthPage/>} />
         <Route path="/home" element={<HomePage/>} />
         <Route path="/orders" element={<OrdersPage/>} />
         <Route path="/" element={<HomePage/>} />

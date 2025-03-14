@@ -62,7 +62,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ isOpen, onClose }) => {
       }));
       console.log(orderData);
      await callApi('/api/order', 'POST',{ orderItems: orderData });
-     
+     console.log("asfasfgdbsdgdsgsdgdgssdgsdgs")
       dispatch({ type: 'cart/clear' }); 
       onClose(); 
     } catch (error) {
