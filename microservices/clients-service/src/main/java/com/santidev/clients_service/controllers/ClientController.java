@@ -5,6 +5,7 @@ import com.santidev.clients_service.model.dtos.ClientRequest;
 import com.santidev.clients_service.model.dtos.ClientResponse;
 import com.santidev.clients_service.model.entities.Client;
 import com.santidev.clients_service.services.ClientService;
+import com.santidev.clients_service.services.JWTService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,8 @@ public class ClientController {
 
     private final AuthenticationManager authenticationManager;
 
+    private final JWTService jwtService;
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addClient(@RequestBody ClientRequest clientRequest) {
@@ -47,20 +50,12 @@ public class ClientController {
     }
 
     @GetMapping("/user")
-    public ClientResponse getUser() {
-        JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+    public ClientResponse getUser(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
 
+        String username = jwtService.extractUsername(token);
 
-
-        String username = authentication.getToken().getClaim("preferred_username");
-
-        System.out.println(username);
-
-        ClientResponse clientResponse = this.clientService.findByUserName(username);
-
-
-            return clientResponse;
-
+        return clientService.findByUserName(username);
     }
 
     @PostMapping("/register")

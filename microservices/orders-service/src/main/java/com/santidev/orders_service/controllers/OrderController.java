@@ -6,6 +6,7 @@ import com.santidev.orders_service.model.dtos.OrderResponse;
 import com.santidev.orders_service.model.entities.Order;
 import com.santidev.orders_service.services.OrderService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +24,24 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    //@CircuitBreaker(name ="orders-service", fallbackMethod = "placerOrderFallBack")
-    public ResponseEntity<OrderResponse> placerOrder(@RequestBody OrderRequest orderRequest){
-        var orders = this.orderService.placeOrder(orderRequest);
-        return ResponseEntity.ok(orders);
+    public ResponseEntity<OrderResponse> placeOrder(@RequestBody OrderRequest orderRequest, HttpServletRequest request) {
+
+        String jwtToken = extractJwtToken(request);
+
+        OrderResponse orderResponse = this.orderService.placeOrder(orderRequest, jwtToken);
+
+        return ResponseEntity.ok(orderResponse);
     }
+
+    private String extractJwtToken(HttpServletRequest request) {
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            return authHeader.substring(7); // Remove "Bearer " prefix
+        }
+        return null;
+    }
+
+
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -37,8 +51,9 @@ public class OrderController {
 
     @GetMapping("/client")
     @ResponseStatus(HttpStatus.OK)
-    public List<OrderResponse> getAllOrdersByClient(){
-        return this.orderService.getAllOrdersByClient();
+    public List<OrderResponse> getAllOrdersByClient(HttpServletRequest request){
+        String jwtToken = extractJwtToken(request);
+        return this.orderService.getAllOrdersByClient(jwtToken);
     }
 
     private ResponseEntity<OrderResponse> placerOrderFallBack(OrderRequest orderRequest,Throwable throwable){

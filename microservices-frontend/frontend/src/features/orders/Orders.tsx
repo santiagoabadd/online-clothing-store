@@ -35,7 +35,7 @@ export const Orders: React.FC = () => {
 
   const loadOrders = async () => {
     try {
-      const result = await callApi('/api/order');
+      const result = await callApi('/api/order/client');
       setOrders(result.data);
     } catch (error) {
       console.error('Failed to load orders:', error);

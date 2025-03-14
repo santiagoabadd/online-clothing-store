@@ -27,26 +27,30 @@ public class OrderService {
 
     private final KafkaTemplate<String,String> kafkaTemplate;
 
-    public OrderResponse placeOrder(OrderRequest orderRequest) {
+    public OrderResponse placeOrder(OrderRequest orderRequest,String jwtToken) {
 
         BaseResponse result = this.webClientBuilder.build()
                 .post()
-                .uri("lb://inventory-service/api/inventory/in-stock")
+                .uri("http://localhost:8080/api/inventory/in-stock")
+                .header("Authorization", "Bearer " + jwtToken)
                 .bodyValue(orderRequest.getOrderItems())
                 .retrieve()
-
                 .bodyToMono(BaseResponse.class)
                 .block();
-        //if (result != null && !result.hasErrors()) {
-            //ClientResponse clientResponse = this.webClientBuilder.build()
-                   // .get()
-                    //.uri("lb://clients-service/api/client/user")
-                    //.retrieve()
-                    //.bodyToMono(ClientResponse.class)
-                    //.block();
+
+        if (result != null && !result.hasErrors()) {
+
+        ClientResponse clientResponse = this.webClientBuilder.build()
+                .get()
+                .uri("http://localhost:8080/api/client/user")
+                .header("Authorization", "Bearer " + jwtToken)
+                .retrieve()
+                .bodyToMono(ClientResponse.class)
+                .block();
+
 
             Order order = new Order();
-            order.setClientId("1");
+            order.setClientId(clientResponse.id().toString());
             order.setOrderNumber(UUID.randomUUID().toString());
             order.setDate(LocalDate.now());
             order.setOrderItems(orderRequest.getOrderItems().stream()
@@ -61,21 +65,22 @@ public class OrderService {
             return mapToOrderResponse(savedOrder);
 
 
-        //} else {
-            //throw new IllegalArgumentException("Some of the products are not in stock");
-        //}
+        } else {
+            throw new IllegalArgumentException("Some of the products are not in stock");
+        }
     }
 
-    public List<OrderResponse> getAllOrdersByClient(){
+    public List<OrderResponse> getAllOrdersByClient(String jwtToken){
 
-        //ClientResponse clientResponse = this.webClientBuilder.build()
-               // .get()
-                //.uri("lb://clients-service/api/client/user")
-                //.retrieve()
-                //.bodyToMono(ClientResponse.class)
-                //.block();
+        ClientResponse clientResponse = this.webClientBuilder.build()
+                .get()
+                .uri("http://localhost:8080/api/client/user")
+                .header("Authorization", "Bearer " + jwtToken)
+                .retrieve()
+                .bodyToMono(ClientResponse.class)
+                .block();
 
-        List<Order> orders= this.orderRepository.findByClientId("1");
+        List<Order> orders= this.orderRepository.findByClientId(clientResponse.id().toString());
 
         return orders.stream().map(this::mapToOrderResponse).toList();
     }
