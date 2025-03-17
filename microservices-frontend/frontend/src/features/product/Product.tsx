@@ -49,6 +49,7 @@ export const Product: React.FC<ProductProps> = ({ idProduct, onOpenCart  }) => {
     const [selectedSize, setSelectedSize] = useState<string>("");
     const [product, setProduct] = useState<ProductObject | null>(null);
     const [quantity, setQuantity] = useState<number>(1);
+    const [sizes, setSizes]=useState<string[]>([]);
 
     const handleImageClick = (image: string) => {
         setSelectedImage(image);
@@ -73,11 +74,32 @@ export const Product: React.FC<ProductProps> = ({ idProduct, onOpenCart  }) => {
             if (result.data.sku) {
                 const images = getImageUrls(result.data.sku);
                 setSelectedImage(images[0]); 
+                loadSizes(result.data.sku);
+                console.log(sizes)
             }
         } catch (error) {
             console.error("Error loading product:", error);
         }
     };
+
+    const loadSizes = async (sku:string) => {
+        try {
+            const url = `/api/product/sizes/${sku}`;
+            console.log("Request URL:", url);
+            const result = await callApi(url);
+            if (Array.isArray(result.data)) {
+                setSizes(result.data);
+                console.log("Sizes state updated:", result.data);
+            } else {
+                console.error("Invalid data format:", result.data);
+                setSizes([]);
+            }
+            console.log(sizes)
+        } catch (error) {
+            console.error("Error loading product:", error);
+        }
+    };
+
 
     const handleAddToCart = () => {
         if (product) {
@@ -125,6 +147,7 @@ export const Product: React.FC<ProductProps> = ({ idProduct, onOpenCart  }) => {
                 <div className="bar-navigator">|</div>
                 <div className="actual-navigator">{`${product?.name}`}</div>
             </div>
+            
             <div className="product-container">
                 <div className="product-media-wrapper">
                     <div className="carousel-gallery">
@@ -186,14 +209,17 @@ export const Product: React.FC<ProductProps> = ({ idProduct, onOpenCart  }) => {
                         <span>In stock 45</span>
                     </div>
                     <div className="product-sizes-input">
-                        <div className="product-size-selected" >
+                    {sizes.length !==1   && <div className="product-size-selected" >
                             <span>SIZE: {selectedSize || "Select size"}</span>
                         </div>
+                        }
+                        
                         <div className="product-sizes-options">
 
                             <ul className="size-options">
-                                {["XXL", "XL", "L", "M", "S"].map((size) => (
+                                {sizes.filter(size => size).map((size) => (
                                     <li
+                                        style={{ color: selectedSize === size ? 'white' : 'black' }}
                                         key={size}
                                         className="size-option"
                                         onClick={() => handleSizeClick(size)}

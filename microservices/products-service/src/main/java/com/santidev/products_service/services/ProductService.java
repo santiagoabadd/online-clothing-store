@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -67,6 +68,30 @@ public class ProductService {
         Product product = products.get(0);
 
         return mapToProductResponse(product);
+    }
+
+    public List<ProductResponse> getProductsBySkuu(String sku) {
+        List<Product> products = productRepository.findBySku(sku);
+        if (products.isEmpty()) {
+            throw new RuntimeException("Product not found with SKU: " + sku);
+        }
+
+
+
+        return products.stream().map(this::mapToProductResponse).toList();
+    }
+
+    public List<String> getSizesByProduct(String sku) {
+        List<Product> products = productRepository.findBySku(sku);
+        if (products.isEmpty()) {
+            throw new RuntimeException("Product not found with SKU: " + sku);
+        }
+        List<String> sizes=new ArrayList<>();
+        for(int i=0;i<products.size();i++){
+            sizes.add(products.get(i).getSize());
+        }
+
+        return sizes;
     }
 
 

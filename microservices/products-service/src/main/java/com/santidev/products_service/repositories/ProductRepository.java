@@ -14,5 +14,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p WHERE p.id IN (SELECT MIN(p1.id) FROM Product p1 WHERE p1.category = ?1 GROUP BY p1.sku)")
     List<Product> findByCategory(String category);
 
+
     List<Product> findBySku(String sku);
 }

@@ -29,6 +29,18 @@ public class ProductController {
         return this.productService.getProductsByCategory(category);
     }
 
+    @GetMapping("/list/sku/{sku}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductResponse> getAllProductsBySku(@PathVariable("sku") String sku){
+        return this.productService.getProductsBySkuu(sku);
+    }
+
+    @GetMapping("/sizes/{sku}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<String> getAllSizesySku(@PathVariable("sku") String sku){
+        return this.productService.getSizesByProduct(sku);
+    }
+
     @GetMapping("/sku/{sku}")
     @ResponseStatus(HttpStatus.OK)
     public ProductResponse getProductBySku(@PathVariable("sku") String sku){
