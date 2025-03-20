@@ -2,6 +2,7 @@ package com.santidev.inventory_service.controllers;
 
 import com.santidev.inventory_service.model.dtos.BaseResponse;
 import com.santidev.inventory_service.model.dtos.OrderItemRequest;
+import com.santidev.inventory_service.model.entities.Inventory;
 import com.santidev.inventory_service.services.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,12 @@ public class InventoryController {
     @ResponseStatus(HttpStatus.OK)
     public boolean isInStock(@PathVariable("sku") String sku,@PathVariable("size") String size) {
         return inventoryService.isInStock(sku,size);
+    }
+
+    @GetMapping("/{sku}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Inventory> isInStock(@PathVariable("sku") String sku) {
+        return inventoryService.getInventorysBySku(sku);
     }
 
     @PostMapping("/in-stock")

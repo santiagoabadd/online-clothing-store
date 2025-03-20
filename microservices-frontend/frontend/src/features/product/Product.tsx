@@ -29,6 +29,14 @@ export const Product: React.FC<ProductProps> = ({ idProduct, onOpenCart  }) => {
         price: number;
     }
 
+    interface InventoryObject {
+        id: number;
+        sku: string;
+        size: string;
+        quantity:number;
+        
+    }
+
     const getImageUrls = (sku: string): string[] => {
         return Array.from({ length: 5 }, (_, index) => `/img/${sku}_${index + 1}.webp`);
     };
@@ -48,6 +56,7 @@ export const Product: React.FC<ProductProps> = ({ idProduct, onOpenCart  }) => {
     const cartState = useSelector((state: RootState) => state.cart);
     const [selectedSize, setSelectedSize] = useState<string>("");
     const [product, setProduct] = useState<ProductObject | null>(null);
+    const [inventory, setInventory] = useState<InventoryObject[]>([]);
     const [quantity, setQuantity] = useState<number>(1);
     const [sizes, setSizes]=useState<string[]>([]);
 
@@ -75,6 +84,7 @@ export const Product: React.FC<ProductProps> = ({ idProduct, onOpenCart  }) => {
                 const images = getImageUrls(result.data.sku);
                 setSelectedImage(images[0]); 
                 loadSizes(result.data.sku);
+                loadInventory(result.data.sku)
                 console.log(sizes)
             }
         } catch (error) {
@@ -96,7 +106,18 @@ export const Product: React.FC<ProductProps> = ({ idProduct, onOpenCart  }) => {
             }
             console.log(sizes)
         } catch (error) {
-            console.error("Error loading product:", error);
+            console.error("Error loading sizes:", error);
+        }
+    };
+
+    const loadInventory = async (sku:string) => {
+        try {
+            const url = `/api/inventory/${sku}`;
+            console.log("Request URL:", url);
+            const result = await callApi(url);
+            setInventory(result.data)
+        } catch (error) {
+            console.error("Error loading inventory:", error);
         }
     };
 
@@ -206,27 +227,29 @@ export const Product: React.FC<ProductProps> = ({ idProduct, onOpenCart  }) => {
                     </div>
                     <div className="product-stock">
                         <CheckCircleIcon className="h-4 w-4 check-icon" />
-                        <span>In stock 45</span>
+                        <span>{}</span>
                     </div>
                     <div className="product-sizes-input">
-                    {sizes.length !==1   && <div className="product-size-selected" >
-                            <span>SIZE: {selectedSize || "Select size"}</span>
-                        </div>
-                        }
-                        
+    
                         <div className="product-sizes-options">
 
                             <ul className="size-options">
-                                {sizes.filter(size => size).map((size) => (
-                                    <li
-                                        style={{ color: selectedSize === size ? 'white' : 'black' }}
-                                        key={size}
-                                        className="size-option"
-                                        onClick={() => handleSizeClick(size)}
-                                    >
-                                        {size}
-                                    </li>
-                                ))}
+                                {inventory.map((item, index) => {        
+                                    const isOutOfStock = item.quantity <= 0;
+
+                                
+                                    const isSelected = item.size === selectedSize;
+                          
+                        
+                                    const sizeClass = `size-option ${isOutOfStock ? 'out-of-stock' : ''} ${isSelected ? 'selected' : ''}`;
+                          
+
+                                    return (
+                                        <li key={index} className={sizeClass} onClick={()=> handleSizeClick(item.size)}>
+                                            {item.size} {item.quantity <= 0 ? '' : ''}
+                                        </li>
+                                    );
+                                })}
                             </ul>
 
                         </div>

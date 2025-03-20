@@ -22,6 +22,11 @@ public class InventoryService {
         return inventory.filter(value -> value.getQuantity() > 0).isPresent();
     }
 
+    public List<Inventory> getInventorysBySku (String sku){
+
+        return inventoryRepository.findBySku(sku);
+    }
+
     public BaseResponse areInStock(List<OrderItemRequest> orderItems) {
         var errorList = new ArrayList<String>();
 

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
-    Optional<Inventory> findBySku(String sku);
 
     List<Inventory> findBySkuIn(List<String> skus);
 
@@ -17,4 +16,6 @@ public interface InventoryRepository extends JpaRepository<Inventory, Long> {
     Optional<Inventory> findBySkuAndSize(@Param("sku") String sku, @Param("size") String size);
 
     List<Inventory> findBySkuInAndSizeIn(List<String> skus, List<String> sizes);
+
+    List<Inventory> findBySku(String sku);
 }
