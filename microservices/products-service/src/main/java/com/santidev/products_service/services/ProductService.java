@@ -6,10 +6,12 @@ import com.santidev.products_service.model.entities.Product;
 import com.santidev.products_service.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -79,6 +81,26 @@ public class ProductService {
 
 
         return products.stream().map(this::mapToProductResponse).toList();
+    }
+
+    public List<ProductResponse> getProductsFiltered(List<String> categories, List<String> sizes, Double minPrice, Double maxPrice) {
+        Specification<Product> spec = ProductSpecification.filterProducts(categories, sizes, minPrice, maxPrice);
+        List<Product> products = productRepository.findAll(spec);
+
+
+        List<Product> uniqueSkuProducts = products.stream()
+                .collect(Collectors.toMap(
+                        Product::getSku,
+                        product -> product,
+                        (existing, replacement) -> existing
+                ))
+                .values()
+                .stream()
+                .toList();
+
+        return uniqueSkuProducts.stream()
+                .map(this::mapToProductResponse)
+                .toList();
     }
 
     public List<String> getSizesByProduct(String sku) {

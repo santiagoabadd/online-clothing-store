@@ -29,6 +29,22 @@ public class ProductController {
         return this.productService.getProductsByCategory(category);
     }
 
+    @GetMapping("/filter")
+    public List<ProductResponse> getFilteredProducts(
+            @RequestParam(required = false) List<String> categories,
+            @RequestParam(required = false) List<String> sizes,
+            @RequestParam(required = false) Double minPrice,
+            @RequestParam(required = false) Double maxPrice) {
+
+        System.out.println("Received request with params: ");
+        System.out.println("Categories: " + categories);
+        System.out.println("Sizes: " + sizes);
+        System.out.println("Min Price: " + minPrice);
+        System.out.println("Max Price: " + maxPrice);
+        return productService.getProductsFiltered(categories, sizes, minPrice, maxPrice);
+    }
+
+
     @GetMapping("/list/sku/{sku}")
     @ResponseStatus(HttpStatus.OK)
     public List<ProductResponse> getAllProductsBySku(@PathVariable("sku") String sku){
